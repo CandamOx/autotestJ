@@ -2,8 +2,12 @@ package ru.team.qa.pages;
 
 import cucumber.api.java.en.When;
 import cucumber.api.java.ru.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class MainPage {
+    WebDriver driver = new ChromeDriver();
 
     @Когда("^открыть главную страницу$")
     @When("^open main page$")
@@ -14,8 +18,7 @@ public class MainPage {
     @Когда("^нажать на кнопку (.+)$")
     @When("^push button (.+)$")
     public static void clickButton(String button) {
-        // тут селениумом надо сделать клик по кнопке
-        // в идеале бы сделать это через super-методы и @Override, можно попробовать разобраться
+        String xpath = "";
     }
 
     @Когда("^заполнить поле (.+) текстом (.+)$")
