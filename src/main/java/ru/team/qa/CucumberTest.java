@@ -21,10 +21,16 @@ import org.junit.runner.RunWith;
 )
 public class CucumberTest {
     @BeforeClass
-    public static void setup() {}
+    public static void setup() {
 
-    public static void main(String[] args) {}
+    }
+
+    public static void main(String[] args) {
+
+    }
 
     @AfterClass
-    public static void teardown() {}
+    public static void teardown() {
+
+    }
 }
