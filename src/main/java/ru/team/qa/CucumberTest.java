@@ -3,6 +3,7 @@ package ru.team.qa;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
+import lombok.SneakyThrows;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -24,6 +25,8 @@ import java.util.Properties;
         snippets = SnippetType.UNDERSCORE
 )
 public class CucumberTest {
+    private static String OPT_ACTIVE_PROPERTIES = "activeProperties";
+
     @BeforeClass
     public static void setup() {}
 
@@ -32,10 +35,49 @@ public class CucumberTest {
         String propsPath = "G://autotestJ/src/main/resources/config/wix.properties";
         props.load(new FileReader(propsPath));
         System.setProperties(props);
-        System.out.println(props.getProperty("webdriver.chrome.driver"));
-        System.out.println(System.getProperty("webdriver.chrome.driver"));
+
+        String tags = System.getProperty("TAGS");
+        if (empty(tags)) {
+            tags = "@UI";
+            System.setProperty("TAGS", tags);
+        }
+        String prop = System.getProperty("cucumber.options");
+        if (empty(prop)) {
+            prop = String.format("--tags %s --plugin pretty", tags);
+            System.setProperty("cucumber.options", prop);
+        }
+        String actProp = System.getProperty("activeProperties");
+        if (empty(actProp)) {
+            actProp = "G://autotestJ/src/main/resources/config/wix.properties";
+            System.setProperty("activeProperties", actProp);
+        }
     }
 
     @AfterClass
     public static void teardown() {}
+
+    private static boolean empty(String prop) {
+        return prop == null || prop.length() == 0;
+    }
+
+
+    @SneakyThrows
+    private static Properties loadProps(String classpath) {
+        String activeProperties = getActiveProperties();
+        Properties properties = new Properties(System.getProperties());
+        return properties;
+    }
+
+    @SneakyThrows
+    public static Properties loadProperties() { return loadProps(); }
+
+    public static Properties loadProps() {
+        String activeProperties = getActiveProperties();
+        Properties properties = new Properties(System.getProperties());
+        return properties;
+    }
+
+    private static String getActiveProperties() {
+        return System.getProperty(OPT_ACTIVE_PROPERTIES);
+    }
 }

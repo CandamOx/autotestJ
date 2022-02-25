@@ -13,8 +13,9 @@ public class MainPage {
     @Когда("^открыть главную страницу$")
     @When("^open main page$")
     public static void openMain() {
-        System.out.println(driver);
-        driver.get(System.getProperty("default.url"));
+        System.out.println(System.getProperty("webdriver.chrome.driver"));
+//        System.out.println(driver);
+//        driver.get(System.getProperty("default.url"));
     }
 
     @Когда("^нажать на кнопку (.+)$")
