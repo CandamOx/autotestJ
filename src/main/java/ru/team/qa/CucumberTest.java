@@ -25,8 +25,6 @@ import java.util.Properties;
         snippets = SnippetType.UNDERSCORE
 )
 public class CucumberTest {
-    private static String OPT_ACTIVE_PROPERTIES = "activeProperties";
-
     @BeforeClass
     public static void setup() {}
 
@@ -60,24 +58,4 @@ public class CucumberTest {
         return prop == null || prop.length() == 0;
     }
 
-
-    @SneakyThrows
-    private static Properties loadProps(String classpath) {
-        String activeProperties = getActiveProperties();
-        Properties properties = new Properties(System.getProperties());
-        return properties;
-    }
-
-    @SneakyThrows
-    public static Properties loadProperties() { return loadProps(); }
-
-    public static Properties loadProps() {
-        String activeProperties = getActiveProperties();
-        Properties properties = new Properties(System.getProperties());
-        return properties;
-    }
-
-    private static String getActiveProperties() {
-        return System.getProperty(OPT_ACTIVE_PROPERTIES);
-    }
 }
