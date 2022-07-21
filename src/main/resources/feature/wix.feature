@@ -7,5 +7,5 @@ Feature: simple test wix site
     * нажать на кнопку "About"
     * заполнить поле "First Name" текстом "Александр"
     * заполнить поле "Last Name" текстом "Пушкин"
-    * заполнить поле "Email" текстом "apushkin@pushka.au"
+    * заполнить поле "Email" текстом "apushkin@pushka.as"
     * нажать на кнопку "Submit"
