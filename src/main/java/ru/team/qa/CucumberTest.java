@@ -6,6 +6,10 @@ import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import java.io.*;
 import java.util.Properties;
@@ -18,12 +22,38 @@ import java.util.Properties;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"G:\\autotestJ\\src\\main\\resources\\feature"}, // ТУТ НАДО ПОМЕНЯТЬ ПУТЬ НА СВОЙ!!!
+        glue = {"ru.team.qa.pages"},
+        features = {".\\src\\main\\resources\\feature"},
         tags = {"@UI"},
         monochrome = true,
         snippets = SnippetType.UNDERSCORE
 )
 public class CucumberTest {
+
+    public static void main(String[] args) throws IOException {
+        Properties props = new Properties();
+        String propsPath = "./src/main/resources/config/wix.properties";
+        props.load(new FileReader(propsPath));
+        System.setProperties(props);
+
+        List<String> argv = new ArrayList(Arrays.asList(
+                "--glue", "ru.team.qa"
+        ));
+        String tags = "@UI";
+        argv.add("--tags");
+        argv.add(tags);
+
+        String feature = "src/main/resources/feature";
+        argv.add(feature);
+
+        try {
+            cucumber.api.cli.Main.main(argv.toArray(new String[]{}));
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 //    @BeforeClass
 //    public static void setup() {}
 //
