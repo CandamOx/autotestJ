@@ -23,7 +23,7 @@ public class ConfigUtils {
         return properties;
     }
 
-    private static String getActivePropertiцes() {
+    private static String getActiveProperties() {
         return System.getProperty(OPT_ACTIVE_PROPERTIES);
     }
 }
